@@ -1,15 +1,14 @@
-CC = gcc
-SOURCES=UniversalApp/Modules/Login/Controller/LoginViewController.m
-FRAMEWORKS:= -framework Foundation -framework Cocoa -framework AppKit
-LIBRARIES:= -lobjc
-CFLAGS=-Wall -Werror -arch i386 -g -v $(SOURCES)
-LDFLAGS=$(LIBRARIES) $(FRAMEWORKS)
-OUT=-o Build/main
+all:
+	mkdir build
+	gcc -Wall -O0 -fprofile-arcs -ftest-coverage -o build/counter UniversalApp/Modules/Login/Controller/LoginViewController.m
 
-all: $(SOURCES) $(OUT)
+test:
+	./build/LoginViewController
+	LC_ALL=en gcov --branch-probabilities --branch-counts src/UniversalApp/Modules/Login/Controller/LoginViewController.m -o .
 
-$(OUT): $(OBJECTS)
-    $(CC) -o $(OBJECTS) $@ $(CFLAGS) $(LDFLAGS) $(OUT)
-
-.m.o: 
-    $(CC) -c -Wall $< -o $@
+clean:
+	rm -rf build
+	rm -f *.gcda
+	rm -f *.gcno
+	rm -f *.gcov
+	rm -rf bw-output
