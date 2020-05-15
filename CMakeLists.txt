@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.9)
-
+include("Modules_CMakeDetermineOBJCXXCompiler.cmake")
 project(UniversalProject)
 set(CMAKE_OBJCXX_COMPILER "@CMAKE_OBJCXX_COMPILER@")
 set(CMAKE_OBJCXX_COMPILER_ARG1 "@CMAKE_OBJCXX_COMPILER_ARG1@")
